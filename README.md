@@ -6,4 +6,25 @@ Implementation of the Sparsemax activation function in Pytorch from the paper:
 This is a Pytorch port of https://github.com/gokceneraslan/SparseMax.torch/  
 Tested in Pytorch 0.4.0
 
+Example usage
+```python
+import torch
+from sparsemax import Sparsemax
+
+sparsemax = Sparsemax(dim=1)
+softmax = torch.nn.Softmax(dim=1)
+
+logits = torch.randn(2, 5)
+print("\nLogits")
+print(logits)
+
+softmax_probs = softmax(logits)
+print("\nSoftmax probabilities")
+print(softmax_probs)
+
+sparsemax_probs = sparsemax(logits)
+print("\nSparsemax probabilities")
+print(sparsemax_probs)
+```
+
 Please add an issue if you have questions or suggestions.
