@@ -37,11 +37,13 @@ class Sparsemax(nn.Module):
 
         """
         # Sparsemax currently only handles 2-dim tensors,
-        # so we reshape and reshape back after sparsemax
+        # so we reshape to a convenient shape and reshape back after sparsemax
+        input = input.transpose(0, self.dim)
         original_size = input.size()
-        input = input.view(-1, input.size(self.dim))
-        
+        input = input.reshape(input.size(0), -1)
+        input = input.transpose(0, 1)
         dim = 1
+
         number_of_logits = input.size(dim)
 
         # Translate input by max for numerical stability
@@ -70,7 +72,11 @@ class Sparsemax(nn.Module):
         # Sparsemax
         self.output = torch.max(torch.zeros_like(input), input - taus)
 
-        output = self.output.view(original_size)
+        # Reshape back to original shape
+        output = self.output
+        output = output.transpose(0, 1)
+        output = output.reshape(original_size)
+        output = output.transpose(0, self.dim)
 
         return output
 
