@@ -28,3 +28,5 @@ print(sparsemax_probs)
 ```
 
 Please add an issue if you have questions or suggestions.
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3860669.svg)](https://doi.org/10.5281/zenodo.3860669)
